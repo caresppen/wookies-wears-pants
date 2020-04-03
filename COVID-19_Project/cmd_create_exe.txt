@@ -1,0 +1,4 @@
+cd C:\@Carlos\Data Science\Projects\COVID-19
+pyinstaller --onefile COVID19_download.py
+
+# Go to dist folder to find the .exe
