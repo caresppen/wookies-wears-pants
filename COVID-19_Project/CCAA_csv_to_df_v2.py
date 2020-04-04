@@ -59,6 +59,7 @@ for e in range(first, last + 1):
     # print(e)
     # print(df)
     # print(df.info())
+
     # cols_w_dot
     if (e == 44) or (e == 45):
         cols_w_dot = ['Infectados', 'Fallecidos']
@@ -83,6 +84,7 @@ for e in range(first, last + 1):
                 match_3 = fnmatch.fnmatch(i, '*0000000000003')
                 match_4 = fnmatch.fnmatch(i, '*9999999999999')
                 match_5 = fnmatch.fnmatch(i, '*9999999999998')
+                match_6 = fnmatch.fnmatch(i, '*¥')
                 # Initializing the mod variable: i_mod
                 i_mod = i
                 # Stablishing the conditions
@@ -96,6 +98,8 @@ for e in range(first, last + 1):
                     i_mod = i.replace('9999999999999','')
                 elif match_5 == True:
                     i_mod = i.replace('9999999999998','')
+                elif match_6 == True:
+                    i_mod = i.replace('¥','')
                 # Replace modifications in the dataframe
                 df[col].replace(i, i_mod, inplace=True)
                 
