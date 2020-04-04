@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import fnmatch
 
-output = r'Downloads'
+output = r'C:\@Carlos\Data Science\Projects\COVID-19\csv_report_tables'
 
 ref_header = ['CCAA', 'Infectados', 'IA (14 d.)', 'Hospitalizados', 'UCI', 'Fallecidos', 'Curados', 'Nuevos']
 df_master = pd.DataFrame(columns=['doc', 'CCAA', 'Infectados', 'Hospitalizados', 'UCI', 'Fallecidos', 'Curados', 'Nuevos'])
@@ -23,7 +23,7 @@ end = COVID19_download.end
 first = start
 last = end
 for e in range(first, last + 1):
-    root = r'Downloads\\' + \
+    root = r'C:\@Carlos\Data Science\Projects\COVID-19\csv_report_tables\root\\' + \
         str(e) + '_CCAA.csv'
     
     file = pd.read_csv(root)
@@ -82,6 +82,7 @@ for e in range(first, last + 1):
                 match_2 = fnmatch.fnmatch(i, '*0000000000001')
                 match_3 = fnmatch.fnmatch(i, '*0000000000003')
                 match_4 = fnmatch.fnmatch(i, '*9999999999999')
+                match_5 = fnmatch.fnmatch(i, '*9999999999998')
                 # Initializing the mod variable: i_mod
                 i_mod = i
                 # Stablishing the conditions
@@ -93,6 +94,8 @@ for e in range(first, last + 1):
                     i_mod = i.replace('0000000000003','')
                 elif match_4 == True:
                     i_mod = i.replace('9999999999999','')
+                elif match_5 == True:
+                    i_mod = i.replace('9999999999998','')
                 # Replace modifications in the dataframe
                 df[col].replace(i, i_mod, inplace=True)
                 
