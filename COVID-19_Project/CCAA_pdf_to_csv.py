@@ -1,11 +1,11 @@
 # Transform the data in the pdf to a pandas df
 
-import COVID19_download
+# import COVID19_download
 import pandas as pd
 import tabula
 
 root = r'Downloads'
-dest = r'Downloads'
+dest = r'Downloads\root'
 
 # tabula - convert all PDFs in a directory (.pdf->.csv)
 # tabula.convert_into_by_batch(root, output_format='csv', pages='all')
@@ -20,16 +20,16 @@ dest = r'Downloads'
 # print(init_list[1])
 
 # Interacting with the user:
-last = COVID19_download.last
-start = COVID19_download.start
-end = COVID19_download.end
+# last = COVID19_download.last
+# start = COVID19_download.start
+# end = COVID19_download.end
 
 ### Report per Table from the data source ###
 ### Tables format from Report 53 ###
 # Tabla 1. Casos COVID-19, incidencia acumulada (IA) en los últimos 14 días, ingreso en UCI y fallecidos por Comunidades Autónomas en España: df_ccaa
 # columns = [CCAA, TOTAL conf. == Infectados, IA (14 d.), Hospitalizados, UCI, Fallecidos, Curados, Nuevos]
-first_doc = start # 36
-last_doc = end # 60
+first_doc = 67 # 36
+last_doc = 67
 df_dict = {}
 for i in range(first_doc, last_doc + 1):
     try:

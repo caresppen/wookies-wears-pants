@@ -5,12 +5,12 @@ import pandas as pd
 import tabula
 
 root = r'Downloads'
-dest = r'Downloads'
+dest = r'Downloads\root'
 
 # Interacting with the user:
-last = COVID19_download.last
-start = COVID19_download.start
-end = COVID19_download.end
+# last = COVID19_download.last
+# start = COVID19_download.start
+# end = COVID19_download.end
 
 ### Report per Table from the data source ###
 ### Tables format from Report 53 ###
@@ -19,14 +19,14 @@ end = COVID19_download.end
 # df_edad_total: ["Edad", "Infectados", "Hospitalizados", "% Hospitalizados" - eliminate, "UCI", "% UCI" - eliminate, "Fallecidos", "% Fallecidos" - eliminate, "% Letalidad" - eliminate]
 # df_edad_mujeres: ["Edad", "Infectados", "Hospitalizados", "% Hospitalizados" - eliminate, "UCI", "% UCI" - eliminate, "Fallecidos", "% Fallecidos" - eliminate, "% Letalidad" - eliminate]
 # df_edad_hombres: ["Edad", "Infectados", "Hospitalizados", "% Hospitalizados" - eliminate, "UCI", "% UCI" - eliminate, "Fallecidos", "% Fallecidos" - eliminate, "% Letalidad" - eliminate]
-first_doc = 53 # fixed to 53
-last_doc = end
+first_doc = 67 # fixed to 53
+last_doc = 67
 df_dict = {}
 for i in range(first_doc, last_doc + 1):
     try:
-        pdf_doc = r'C:\@Carlos\Data Science\Projects\COVID-19\isciii_pdf_reports\\' + str(i) + '_COVID-19.pdf'
+        pdf_doc = r'Downloads\\' + str(i) + '_COVID-19.pdf'
         table = tabula.read_pdf(pdf_doc, pages='all', multiple_tables=True)
-        if i == 57:
+        if (i == 57) or (i == 65):
             df_dict[i] = pd.DataFrame(table[2])
         else:
             df_dict[i] = pd.DataFrame(table[1])

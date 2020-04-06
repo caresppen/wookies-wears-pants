@@ -1,29 +1,31 @@
 ### Report per Table from the data source ###
 
-import COVID19_download
+# import COVID19_download
 import pandas as pd
 import numpy as np
 import fnmatch
+import datetime as dt
 
-output = r'C:\@Carlos\Data Science\Projects\COVID-19\csv_report_tables'
+output = r'Downloads'
+master_root = r'Downloads\CCAA_data.csv'
 
 ref_header = ['CCAA', 'Infectados', 'IA (14 d.)', 'Hospitalizados', 'UCI', 'Fallecidos', 'Curados', 'Nuevos']
 df_master = pd.DataFrame(columns=['doc', 'CCAA', 'Infectados', 'Hospitalizados', 'UCI', 'Fallecidos', 'Curados', 'Nuevos'])
 ccaa_mapping = {'Andalucía':'Andalucia', 'Aragón':'Aragon', 'Asturias':'Asturias', 'Baleares':'Baleares', \
     'C Valenciana':'C. Valenciana', 'C. Valenciana':'C. Valenciana', 'Canarias':'Canarias', 'Cantabria':'Cantabria', 'Castilla-La Mancha':'Castilla La Mancha', \
-    'Castilla La Mancha':'Castilla La Mancha', 'Castilla y León': 'Castilla y Leon', 'Cataluña':'Catalunya', 'Ceuta':'Ceuta', 'Extremadura':'Extremadura', \
+    'Castilla La Mancha':'Castilla La Mancha', 'Castilla y León': 'Castilla y Leon', 'Cataluña':'Cataluña', 'Ceuta':'Ceuta', 'Extremadura':'Extremadura', \
     'Galicia':'Galicia', 'La Rioja':'La Rioja', 'Madrid':'Madrid', 'Melilla':'Melilla', 'Murcia':'Murcia', 'Navarra':'Navarra', 'País Vasco':'Pais Vasco'}
 
 # Interacting with the user:
-last = COVID19_download.last
-start = COVID19_download.start
-end = COVID19_download.end
+# last = COVID19_download.last
+# start = COVID19_download.start
+# end = COVID19_download.end
 
 # Tabla 1. Distribución de casos notificados de COVID-19 en España por CCAA
-first = start
-last = end
+first = 36
+last = 67
 for e in range(first, last + 1):
-    root = r'C:\@Carlos\Data Science\Projects\COVID-19\csv_report_tables\root\\' + \
+    root = r'Downloads\root\\' + \
         str(e) + '_CCAA.csv'
     
     file = pd.read_csv(root)
@@ -141,12 +143,30 @@ for e in range(first, last + 1):
     df['doc'] = e
     df_master = df_master.append(df, sort=False)
 
+# Defining function to add the Date column: Date
+def set_date(row):
+    '''Defines the date per doc, being 39 the first doc to iterate in the delta'''
+    init_day = dt.datetime.strptime('09/03/20', '%d/%m/%y')
+    delta = row["doc"]-39
+
+    if (row["doc"] == 36):
+        return dt.datetime.strptime('04/03/20', '%d/%m/%y')
+    elif (row["doc"] == 37):
+        return dt.datetime.strptime('05/03/20', '%d/%m/%y')
+    elif (row["doc"] == 38):
+        return dt.datetime.strptime('06/03/20', '%d/%m/%y')
+    else:
+        return init_day + dt.timedelta(days=delta)
+
+# Applying the function to the df_master to obtain the date column
+df_master = df_master.assign(Date=df_master.apply(set_date, axis=1))
+
 # Cleansing of the output dataset
-df_master = df_master[['doc', 'CCAA', 'Infectados', 'Hospitalizados', 'UCI', 'Fallecidos', 'Curados', 'Nuevos']]
+df_master = df_master[['Date', 'doc', 'CCAA', 'Infectados', 'Hospitalizados', 'UCI', 'Fallecidos', 'Curados', 'Nuevos']]
 df_master['CCAA'] = df_master.CCAA.map(ccaa_mapping)
 
 # Generating the output
-out_master = output + '\CCAA_data.csv'
+out_master = output + '\\CCAA_data.csv'
 df_master.to_csv(out_master, index=False)
 print("CCAA_data.csv ready to be explored!")
 

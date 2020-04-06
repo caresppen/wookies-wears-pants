@@ -1,6 +1,6 @@
 ### Report per Table from the data source ###
 
-import COVID19_download
+# import COVID19_download
 import pandas as pd
 import numpy as np
 
@@ -14,9 +14,9 @@ df_master_muj = df_master
 df_master_hom = df_master
 
 # Interacting with the user:
-last = COVID19_download.last
-start = COVID19_download.start
-end = COVID19_download.end
+# last = COVID19_download.last
+# start = COVID19_download.start
+# end = COVID19_download.end
 
 # Tabla 2. Características demográficas y clínicas de los casos de COVID-19 en España
 # df_edad_total: ["Edad", "Infectados", "Hospitalizados", "% Hospitalizados" - eliminate, "UCI", "% UCI" - eliminate, "Fallecidos", "% Fallecidos" - eliminate, "% Letalidad" - eliminate]
@@ -24,10 +24,10 @@ end = COVID19_download.end
 # df_edad_hombres: ["Edad", "Infectados", "Hospitalizados", "% Hospitalizados" - eliminate, "UCI", "% UCI" - eliminate, "Fallecidos", "% Fallecidos" - eliminate, "% Letalidad" - eliminate]
 # Data from report 53
 first = 53 # fixed to 53
-last = end
+last = 67
 # Error for 53-57 -> different cleanings
 for i in range(first, last+1):
-    root = r'Downloads\\' + \
+    root = r'Downloads\root\\' + \
         str(i) + '_Demog.csv'
     
     file = pd.read_csv(root, decimal=',', thousands='.')

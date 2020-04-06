@@ -6,7 +6,7 @@ import Demog_pdf_to_csv
 import CCAA_csv_to_df_v2
 import Demog_csv_to_df
 
-root = r'C:\@Carlos\Data Science\Projects\COVID-19'
+root = r'Downloads'
 
 # Running all the scripts:
 COVID19_download
