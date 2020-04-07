@@ -1,0 +1,20 @@
+Open cmd and install the following packages using these commands:
+
+jupyter-notebook:
+
+pip install pandas
+pip install numpy
+pip install seaborn
+pip install voila
+pip install ipyvuetify
+pip install plotly
+
+
+scripts:
+
+pip install pandas
+pip install numpy
+pip install datetime
+pip install tabula
+pip install requests
+pip install lxml
